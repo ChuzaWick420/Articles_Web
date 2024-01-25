@@ -11,9 +11,11 @@ function Landing () {
             
             <p>Click the button below to access the articles articles.</p>
 
-            <button>
-                <Link to="preview">Read Articles</Link>
-            </button>
+            <Link to="preview">
+                <button>
+                    Read Articles
+                </button>
+            </Link>
             
         </div>
     );
