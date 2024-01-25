@@ -13,15 +13,9 @@ function App() {
         <Route path="/" element={<Layout />} >
 
           <Route index element={<Landing />} />
-
-          <Route path="preview" element={<Layout />} >
-
-            <Route index element={<Preview />} />
-            <Route path=":article_id" element={<Preview />} />
-          
-            <Route path=":article_id/details" element={<Details />} />
-          
-          </Route>
+          <Route path="preview" element={<Preview />} />
+          <Route path="preview/:article_id" element={<Preview />} />
+          <Route path="preview/:article_id/details" element={<Details />} />
 
         </Route>
       </Routes>
