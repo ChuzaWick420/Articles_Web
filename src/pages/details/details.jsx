@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import getData from "../../api/get";
+import postData from "../../api/post";
 
 function Details () {
 
     let loc = useLocation();
     let current_id = loc.pathname.split("/")[2];
+
+    //get default likes and dislike counts
 
     const[heading, setHeading] = useState("NULL");
     const[icon, setIcon] = useState("");
@@ -33,8 +36,22 @@ function Details () {
                 {content}
             </div>
             <div>
-                <button>Likes: {likes}</button>
-                <button>Dislikes: {dislikes}</button>
+                <button onClick={()=>{
+                    postData(current_id, likes + 1).then((response)=>{
+                        console.log("Success");
+                        console.log(response);
+                        //update the state as well
+                        setLikes(likes + 1);
+                    });
+                }}>Likes: {likes}</button>
+                <button onClick={()=>{
+                    postData(current_id, dislikes + 1).then((response)=>{
+                        console.log("Success");
+                        console.log(response);
+                        //update the state as well
+                        setDislikes(dislikes + 1);
+                    });
+                }}>Dislikes: {dislikes}</button>
             </div>
             <footer>
                 

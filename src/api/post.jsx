@@ -1,4 +1,4 @@
-async function postData (article_id, likes, dislikes) {
+async function postData (article_id, likes = 0, dislikes = 0) {
     
     let url = `http://localhost:1337/api/articles/${article_id}`;
 
