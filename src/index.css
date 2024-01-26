@@ -20,4 +20,5 @@ body {
   border-style: solid;
   border-radius: var(--border-primary);
   font-family: 'Montserrat', sans-serif;
+  overflow-y: scroll;
 }
