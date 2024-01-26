@@ -8,8 +8,6 @@ function Details () {
     let loc = useLocation();
     let current_id = loc.pathname.split("/")[2];
 
-    //get default likes and dislike counts
-
     const[heading, setHeading] = useState("NULL");
     const[icon, setIcon] = useState("");
     const[content, setContent] = useState("null");
