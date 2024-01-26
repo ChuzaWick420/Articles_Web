@@ -37,7 +37,7 @@ function Details () {
             </div>
             <div>
                 <button onClick={()=>{
-                    postData(current_id, likes + 1).then((response)=>{
+                    postData(current_id, likes + 1, -1).then((response)=>{
                         console.log("Success");
                         console.log(response);
                         //update the state as well
@@ -45,7 +45,7 @@ function Details () {
                     });
                 }}>Likes: {likes}</button>
                 <button onClick={()=>{
-                    postData(current_id, dislikes + 1).then((response)=>{
+                    postData(current_id, -1, dislikes + 1).then((response)=>{
                         console.log("Success");
                         console.log(response);
                         //update the state as well
