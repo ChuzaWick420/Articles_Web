@@ -42,7 +42,7 @@ function Details () {
             <div className="details_content">
                 {content}
             </div>
-            <div>
+            <div className="details_buttons">
                 <button onClick={()=>{
                     postData(current_id, likes + 1, -1).then((response)=>{
                         console.log("Success");
