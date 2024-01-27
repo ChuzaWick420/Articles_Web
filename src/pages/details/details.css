@@ -1,5 +1,6 @@
 .details_page {
     overflow-x: hidden;
+    padding: var(--page_padding);
 }
 
 .details_header {
