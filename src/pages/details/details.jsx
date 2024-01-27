@@ -30,7 +30,7 @@ function Details () {
         getData("footer", current_id).then((result)=>{
             setFooter(result["footer_list_content"]);
         });
-        
+
     }, []);
 
     return (
