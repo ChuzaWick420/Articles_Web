@@ -21,7 +21,11 @@
     border-color: white;
     border-radius: var(--border-primary);
     padding: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
 }
+
 .details_footer {
     display: flex;
     flex-direction: row;
