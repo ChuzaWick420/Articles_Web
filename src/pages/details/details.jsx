@@ -50,7 +50,13 @@ function Details () {
                         //update the state as well
                         setLikes(likes + 1);
                     });
-                }}>Likes: {likes}</button>
+                }}>
+                    <span class="material-symbols-outlined">
+                        thumb_up
+                    </span>
+                    | {likes}
+                </button>
+
                 <button onClick={()=>{
                     postData(current_id, -1, dislikes + 1).then((response)=>{
                         console.log("Success");
@@ -58,7 +64,12 @@ function Details () {
                         //update the state as well
                         setDislikes(dislikes + 1);
                     });
-                }}>Dislikes: {dislikes}</button>
+                }}>
+                    <span class="material-symbols-outlined">
+                        thumb_down
+                    </span>
+                    | {dislikes}
+                </button>
             </div>
             <footer className="details_footer">
                {footer} 
