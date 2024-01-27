@@ -1,3 +1,7 @@
+.details_page {
+    overflow-x: hidden;
+}
+
 .details_header {
     display: grid;
     grid-template-columns: auto auto;
@@ -13,5 +17,5 @@
 .footer_card {
     width: 300px;
     height: 150px;
-    overflow-x: hidden;
+    overflow: hidden;
 }

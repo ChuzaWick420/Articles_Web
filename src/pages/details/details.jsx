@@ -34,7 +34,7 @@ function Details () {
     }, []);
 
     return (
-        <div>
+        <div className="details_page">
             <div className="details_header">
                 <h1>{heading}</h1>
                 <img src={icon} />
