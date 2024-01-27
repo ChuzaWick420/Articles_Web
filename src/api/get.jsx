@@ -1,3 +1,4 @@
+import React from "react";
 import parse from "html-react-parser";
 
 async function getData(request_type, article_id = 0) {
@@ -58,10 +59,22 @@ async function getData(request_type, article_id = 0) {
             let tempDiv = document.createElement("div");
             
             for (let i = 0; i < result["data"].length; i++) {
+                
                 tempDiv.innerHTML = result["data"][i]["attributes"]["content"];
+                
                 let ele = tempDiv.querySelector("p");
+                
+                let target = ele.innerHTML;
+                
+                let reactComp = (
+                    <div className="footer_card">
+                        <h6>{details.category_name}</h6>
+                        <p>{parse(target)}</p>
+                    </div>
+                );
+                
                 footer_list.push(
-                    parse(ele.innerHTML)
+                    reactComp
                 );
             }
 
