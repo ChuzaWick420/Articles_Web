@@ -13,6 +13,7 @@ function Details () {
     const[content, setContent] = useState("null");
     const[likes, setLikes] = useState(0);
     const[dislikes, setDislikes] = useState(0);
+    const[footer, setFooter] = useState("null");
 
     useEffect(()=>{
         getData("details", current_id).then((data)=>{
@@ -21,6 +22,10 @@ function Details () {
             setContent(data.content);
             setLikes(data.likes);
             setDislikes(data.dislikes);
+        });
+        getData("footer", current_id).then((result)=>{
+            console.log(result["footer_list_content"]);
+            setFooter(result["footer_list_content"]);
         });
     }, []);
 
@@ -52,7 +57,7 @@ function Details () {
                 }}>Dislikes: {dislikes}</button>
             </div>
             <footer>
-                
+               {footer} 
             </footer>
         </div>
     );
