@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import getData from "../../api/get";
 import postData from "../../api/post";
 
+import "./details.css";
+
 function Details () {
 
     let loc = useLocation();
@@ -16,6 +18,7 @@ function Details () {
     const[footer, setFooter] = useState("null");
 
     useEffect(()=>{
+        
         getData("details", current_id).then((data)=>{
             setHeading(data.heading);
             setIcon(data.icon_url);
@@ -23,10 +26,11 @@ function Details () {
             setLikes(data.likes);
             setDislikes(data.dislikes);
         });
+       
         getData("footer", current_id).then((result)=>{
-            console.log(result["footer_list_content"]);
             setFooter(result["footer_list_content"]);
         });
+        
     }, []);
 
     return (
@@ -56,7 +60,7 @@ function Details () {
                     });
                 }}>Dislikes: {dislikes}</button>
             </div>
-            <footer>
+            <footer className="details_footer">
                {footer} 
             </footer>
         </div>
