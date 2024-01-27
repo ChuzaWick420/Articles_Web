@@ -16,6 +16,9 @@ function Details () {
     const[likes, setLikes] = useState(0);
     const[dislikes, setDislikes] = useState(0);
     const[footer, setFooter] = useState("null");
+    const[activeButton, setActiveButton] = useState("null");
+    const[likes_active, setLikes_active] = useState("material-symbols-outlined");
+    const[dislikes_active, setDislikes_active] = useState("material-symbols-outlined");
 
     useEffect(()=>{
         
@@ -33,6 +36,18 @@ function Details () {
 
     }, []);
 
+    //updates buttons appearance
+    useEffect(()=>{
+        if (activeButton == "like") {
+            setLikes_active("material-symbols-outlined active_button");
+            setDislikes_active("material-symbols-outlined");
+        }
+        else if (activeButton == "dislike") {
+            setDislikes_active("material-symbols-outlined active_button");
+            setLikes_active("material-symbols-outlined");
+        }
+    }, [activeButton]);
+
     return (
         <div className="details_page">
             <div className="details_header">
@@ -44,28 +59,28 @@ function Details () {
             </div>
             <div className="details_buttons">
                 <button onClick={()=>{
-                    postData(current_id, likes + 1, -1).then((response)=>{
-                        console.log("Success");
-                        console.log(response);
-                        //update the state as well
-                        setLikes(likes + 1);
-                    });
+                    if (activeButton != "like") {
+                        let updatedLikes = likes + 1;
+                        setLikes(updatedLikes);
+                        postData(current_id, updatedLikes, -1)
+                    }
+                    setActiveButton("like");
                 }}>
-                    <span class="material-symbols-outlined">
+                    <span className={likes_active}>
                         thumb_up
                     </span>
                     | {likes}
                 </button>
 
                 <button onClick={()=>{
-                    postData(current_id, -1, dislikes + 1).then((response)=>{
-                        console.log("Success");
-                        console.log(response);
-                        //update the state as well
-                        setDislikes(dislikes + 1);
-                    });
+                    if (activeButton != "dislike") {
+                        let updateDislikes = dislikes + 1;
+                        setDislikes(updateDislikes);
+                        postData(current_id, -1, updateDislikes);
+                    }
+                    setActiveButton("dislike");
                 }}>
-                    <span class="material-symbols-outlined">
+                    <span className={dislikes_active}>
                         thumb_down
                     </span>
                     | {dislikes}
