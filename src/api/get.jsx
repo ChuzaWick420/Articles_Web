@@ -67,7 +67,7 @@ async function getData(request_type, article_id = 0) {
                 let target = ele.innerHTML;
                 
                 let reactComp = (
-                    <div className="footer_card">
+                    <div className="footer_card" key={i}>
                         <h6>{details.category_name}</h6>
                         <p>{parse(target)}</p>
                     </div>
