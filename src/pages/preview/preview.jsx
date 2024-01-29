@@ -12,12 +12,28 @@ function Preview () {
     const [header, setHeader] = useState("null");
     const [iconURL, setIconURL] = useState("null");
     const [footer, setFooter] = useState("null");
+    const [categoryCards, setCategoryCards] = useState([]);
 
     useEffect(()=>{
+        let cards = [];
         setActiveArticleID(para_article_id);
+        
         getData("category_cards").then((result)=>{
-            console.log("result", result);
+            for (let card of result) {
+                console.log(card.name);
+                cards.push(
+                    <div className="category_card" key={result.indexOf(card)}>
+                        <div>
+                            <h6>{card.name}</h6>
+                            {card.content}
+                        </div>
+                        <div className="img_container" style={{"background-image": `url(${card.icon_url})`}} />
+                    </div>
+                );
+            }
         });
+
+        setCategoryCards(cards);
     }, []);
 
     //send get requests to populate content
@@ -53,7 +69,7 @@ function Preview () {
                     <span className="material-symbols-outlined">search</span>
                 </div>
                 <div className="category_list">
-
+                    {categoryCards}
                 </div>
             </div>
         </div>
