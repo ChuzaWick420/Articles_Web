@@ -20,9 +20,11 @@ function Preview () {
         
         getData("category_cards").then((result)=>{
             for (let card of result) {
-                console.log(card.name);
+                let index = result.indexOf(card) + 1;
                 cards.push(
-                    <div className="category_card" key={result.indexOf(card)}>
+                    <div className="category_card" key={index} onClick={()=>{
+                        setActiveCategoryID(index);
+                    }}>
                         <div>
                             <h6>{card.name}</h6>
                             {card.content}
