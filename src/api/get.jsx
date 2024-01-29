@@ -45,7 +45,8 @@ async function getData(request_type, article_id = 0) {
                 cards.push({
                     icon_url: "http://localhost:1337" + result["data"][0]["attributes"]["icon"]["data"][0]["attributes"]["formats"]["small"]["url"],
                     content: (<p>{element.innerHTML}</p>),
-                    name: result["data"][0]["attributes"]["category"]["data"]["attributes"]["name"]
+                    name: result["data"][0]["attributes"]["category"]["data"]["attributes"]["name"],
+                    article_id: result["data"][0]["id"]
                 });
             }
 

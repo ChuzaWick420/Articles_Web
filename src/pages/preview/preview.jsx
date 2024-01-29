@@ -16,13 +16,11 @@ function Preview () {
 
     useEffect(()=>{
         let cards = [];
-        setActiveArticleID(para_article_id);
-        
         getData("category_cards").then((result)=>{
             for (let card of result) {
                 let index = result.indexOf(card) + 1;
                 cards.push(
-                    <Link to={`../preview/${index}`}>
+                    <Link to={`../preview/${card.article_id}`}>
                         <div className="category_card" key={index} onClick={()=>{
                             setActiveCategoryID(index);
                         }}>
