@@ -14,28 +14,14 @@ function Preview () {
     const [footer, setFooter] = useState("null");
     const [categoryCards, setCategoryCards] = useState([]);
 
-    useEffect(()=>{
-        let cards = [];
-        getData("category_cards").then((result)=>{
-            for (let card of result) {
-                let index = result.indexOf(card) + 1;
-                cards.push(
-                    <Link to={`../preview/${card.article_id}`}>
-                        <div className="category_card" key={index} onClick={()=>{
-                            setActiveCategoryID(index);
-                        }}>
-                            <div>
-                                <h6>{card.name}</h6>
-                                {card.content}
-                            </div>
-                            <div className="img_container" style={{"background-image": `url(${card.icon_url})`}} />
-                        </div>
-                    </Link>
-                );
-            }
-        });
+    let cards = [];
 
-        setCategoryCards(cards);
+    useEffect(()=>{
+        
+        getData("category_cards").then((result)=>{
+            setCategoryCards(result);
+        });
+        
     }, []);
 
     //send get requests to populate content
@@ -72,7 +58,21 @@ function Preview () {
                     <span className="material-symbols-outlined">search</span>
                 </div>
                 <div className="category_list">
-                    {categoryCards}
+                    {categoryCards.map((element, index)=>{
+                        return (
+                            <Link to={`../preview/${element.article_id}`} key={index}>
+                                <div className="category_card" onClick={()=>{
+                                    setActiveCategoryID(index + 1);
+                                }}>
+                                    <div>
+                                        <h6>{element.name}</h6>
+                                        {element.content}
+                                    </div>
+                                    <div className="img_container" style={{"background-image": `url(${element.icon_url})`}} />
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </div>
