@@ -1,6 +1,6 @@
 .preview_page {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 70% 30%;
 }
 
 .preview_header {
@@ -13,6 +13,19 @@
     flex-direction: row;
     gap: 20px;
     overflow-x: scroll;
+}
+
+.sub {
+    background-color: gray;
+    border-radius: var(--border-primary);
+    margin: 10px;
+}
+
+.search_bar {
+    background-color: darkcyan;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .category_list {
