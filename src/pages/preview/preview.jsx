@@ -50,6 +50,7 @@ function Preview () {
 
     //update footer when category id updates
     useEffect(()=>{
+        setActiveArticleID(para_article_id.article_id);
         getData("footer", para_article_id.article_id).then((result)=>{
             setFooter(result.footer_list_content);
         });
