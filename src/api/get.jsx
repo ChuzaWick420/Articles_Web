@@ -80,6 +80,7 @@ async function getData(request_type, article_id = 0) {
             result = await response.json();
 
             let footer_list = [];
+            let footer_ids = [];
 
             let tempDiv = document.createElement("div");
             
@@ -101,11 +102,16 @@ async function getData(request_type, article_id = 0) {
                 footer_list.push(
                     reactComp
                 );
+
+                footer_ids.push(
+                    result["data"][i]["id"]
+                );
             }
 
             return {
                 category_name: result["data"][0]["attributes"]["category"]["data"]["attributes"]["name"],
-                footer_list_content: footer_list
+                footer_list_content: footer_list,
+                footer_list_IDs: footer_ids
             };
 
     }
