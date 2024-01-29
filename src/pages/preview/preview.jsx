@@ -64,7 +64,7 @@ function Preview () {
                                 <div className="category_card" onClick={()=>{
                                     setActiveCategoryID(index + 1);
                                 }}>
-                                    <div>
+                                    <div className="category_text">
                                         <h6>{element.name}</h6>
                                         {element.content}
                                     </div>
