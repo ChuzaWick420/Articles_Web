@@ -7,3 +7,10 @@
     display: grid;
     grid-template-columns: auto auto;
 }
+
+.preview_footer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: scroll;
+}
