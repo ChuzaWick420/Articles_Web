@@ -44,7 +44,12 @@ function Preview () {
                 </Link>
                 <footer className="preview_footer">{footer}</footer>
             </div>
-            <div className="sub"></div>
+            <div className="sub">
+                <div className="search_bar">
+                    <input type="text" placeholder="category" />
+                    <span className="material-symbols-outlined">search</span>
+                </div>
+            </div>
         </div>
     );
 }
