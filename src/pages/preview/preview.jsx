@@ -49,6 +49,9 @@ function Preview () {
                     <input type="text" placeholder="category" />
                     <span className="material-symbols-outlined">search</span>
                 </div>
+                <div className="category_list">
+
+                </div>
             </div>
         </div>
     );
