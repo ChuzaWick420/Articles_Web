@@ -30,6 +30,10 @@
     border-radius: var(--border-primary);
 }
 
+.category_list * {
+    text-decoration: none;
+}
+
 .category_card p {
     margin: 0;
     display: -webkit-box;
@@ -45,6 +49,10 @@
     aspect-ratio: 1;
     margin: 30px;
     border-radius: var(--border-primary);
+}
+
+.category_card > div {
+    color: white;
 }
 
 .active_category_card {

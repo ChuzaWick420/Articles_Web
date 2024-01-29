@@ -7,7 +7,7 @@ import "./preview.css";
 function Preview () {
 
     const para_article_id = useParams();
-    const [activeArticleID, setActiveArticleID] = useState(1);
+    const [activeArticleID, setActiveArticleID] = useState(para_article_id.article_id);
     const [activeCategoryID, setActiveCategoryID] = useState(0);
     const [header, setHeader] = useState("null");
     const [iconURL, setIconURL] = useState("null");
@@ -22,15 +22,17 @@ function Preview () {
             for (let card of result) {
                 let index = result.indexOf(card) + 1;
                 cards.push(
-                    <div className="category_card" key={index} onClick={()=>{
-                        setActiveCategoryID(index);
-                    }}>
-                        <div>
-                            <h6>{card.name}</h6>
-                            {card.content}
+                    <Link to={`../preview/${index}`}>
+                        <div className="category_card" key={index} onClick={()=>{
+                            setActiveCategoryID(index);
+                        }}>
+                            <div>
+                                <h6>{card.name}</h6>
+                                {card.content}
+                            </div>
+                            <div className="img_container" style={{"background-image": `url(${card.icon_url})`}} />
                         </div>
-                        <div className="img_container" style={{"background-image": `url(${card.icon_url})`}} />
-                    </div>
+                    </Link>
                 );
             }
         });
@@ -56,7 +58,7 @@ function Preview () {
     return (
         <div className="preview_page">
             <div className="main">
-                <div className="preview_header">
+                <div className="preview_header">    
                     <h1>{header}</h1>
                     <img src={iconURL} width={400}></img>
                 </div>
