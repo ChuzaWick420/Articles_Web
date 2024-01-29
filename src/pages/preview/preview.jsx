@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Preview () {
 
-    const current_article_id = useParams();
+    const para_article_id = useParams();
+    const [activeArticleID, setActiveArticleID] = useState(0);
+
+    useEffect(()=>{
+        setActiveArticleID(para_article_id);
+    }, []);
 
     return (
-        <div>Welcome to previews: {current_article_id.article_id} </div>
+        <div>Welcome to previews: {activeArticleID.article_id} </div>
     );
 }
 
