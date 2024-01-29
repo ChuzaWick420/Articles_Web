@@ -29,27 +29,37 @@ function Details () {
             setLikes(data.likes);
             setDislikes(data.dislikes);
         });
-       
+        
         getData("footer", current_id).then((result)=>{
             setFooter(result["footer_list_content"]);
         });
-
+        
     }, []);
+    
+    let updatedLikes = likes;
+    let updatedDislikes = dislikes;
 
     //updates buttons appearance
     useEffect(()=>{
-        if (activeButton == "like") {
-            setLikes_active("material-symbols-outlined active_button");
-            setDislikes_active("material-symbols-outlined");
+      
+        switch (activeButton) {
+     
+            case "like":
+                setLikes_active("material-symbols-outlined active_button");
+                setDislikes_active("material-symbols-outlined");
+                break;
+    
+            case "dislike":
+                setDislikes_active("material-symbols-outlined active_button");
+                setLikes_active("material-symbols-outlined");
+                break;
+
+            default:
+                setLikes_active("material-symbols-outlined");
+                setDislikes_active("material-symbols-outlined");
+                break;
         }
-        else if (activeButton == "dislike") {
-            setDislikes_active("material-symbols-outlined active_button");
-            setLikes_active("material-symbols-outlined");
-        }
-        else {
-            setLikes_active("material-symbols-outlined");
-            setDislikes_active("material-symbols-outlined");
-        }
+
     }, [activeButton]);
 
     return (
@@ -63,18 +73,27 @@ function Details () {
             </div>
             <div className="details_buttons">
                 <button onClick={()=>{
-                    if (activeButton != "like") {
-                        let updatedLikes = likes + 1;
-                        setLikes(updatedLikes);
-                        postData(current_id, updatedLikes, -1)
-                        setActiveButton("like");
+                    switch(activeButton) {
+                        case "like":
+                            updatedLikes = likes - 1;
+                            setActiveButton("null");
+                            break;
+                        case "dislike":
+                            updatedLikes = likes + 1;
+                            updatedDislikes = dislikes - 1;
+                            setActiveButton("like");
+                            postData(current_id, updatedLikes, updatedDislikes);
+                            setLikes(updatedLikes);
+                            setDislikes(updatedDislikes);
+                            return;
+                        default:
+                            updatedLikes = likes + 1;
+                            setActiveButton("like");
+                            break;
                     }
-                    else {
-                        let updatedLikes = likes - 1;
-                        setLikes(updatedLikes);
-                        postData(current_id, updatedLikes, -1)
-                        setActiveButton("null");
-                    }
+                    setLikes(updatedLikes);
+                    setDislikes(updatedDislikes);
+                    postData(current_id, updatedLikes, -1);
                 }}>
                     <span className={likes_active}>
                         thumb_up
@@ -83,18 +102,27 @@ function Details () {
                 </button>
 
                 <button onClick={()=>{
-                    if (activeButton != "dislike") {
-                        let updateDislikes = dislikes + 1;
-                        setDislikes(updateDislikes);
-                        postData(current_id, -1, updateDislikes);
-                        setActiveButton("dislike");
+                    switch(activeButton) {
+                        case "like":
+                            updatedLikes = likes - 1;
+                            updatedDislikes = dislikes + 1;
+                            setActiveButton("dislike");
+                            setLikes(updatedLikes);
+                            setDislikes(updatedDislikes);
+                            postData(current_id, updatedLikes, updatedDislikes);
+                            return;
+                        case "dislike":
+                            updatedDislikes = dislikes - 1;
+                            setActiveButton("null");
+                            break;
+                        default:
+                            updatedDislikes = dislikes + 1;
+                            setActiveButton("dislike");
+                            break;
                     }
-                    else {
-                        let updatedDislikes = dislikes - 1;
-                        setDislikes(updatedDislikes);
-                        postData(current_id, -1, updatedDislikes);
-                        setActiveButton("null");
-                    }
+                    setLikes(updatedLikes);
+                    setDislikes(updatedDislikes);
+                    postData(current_id, -1, updatedDislikes);
                 }}>
                     <span className={dislikes_active}>
                         thumb_down
