@@ -1,0 +1,9 @@
+.preview_page {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.preview_header {
+    display: grid;
+    grid-template-columns: auto auto;
+}

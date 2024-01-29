@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import getData from "../../api/get";
 
+import "./preview.css";
+
 function Preview () {
 
     const para_article_id = useParams();
@@ -35,7 +37,7 @@ function Preview () {
             <div className="main">
                 <div className="preview_header">
                     <h1>{header}</h1>
-                    <img src={iconURL}></img>
+                    <img src={iconURL} width={400}></img>
                 </div>
                 <Link to = {`../preview/${para_article_id.article_id}/details`}>
                     <button>Read More</button>
