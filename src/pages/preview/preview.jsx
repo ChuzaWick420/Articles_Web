@@ -17,7 +17,7 @@ function Preview () {
 
     //send get requests to populate content
     useEffect(()=>{
-        getData("details", activeArticleID).then((result)=>{
+        getData("details", para_article_id.article_id).then((result)=>{
             setHeader(result.heading);
             setIconURL(result.icon_url);
         });
@@ -25,7 +25,7 @@ function Preview () {
 
     //update footer when category id updates
     useEffect(()=>{
-        getData("footer", activeArticleID).then((result)=>{
+        getData("footer", para_article_id.article_id).then((result)=>{
             setFooter(result.footer_list_content);
         });
     }, [activeCategoryID]);
