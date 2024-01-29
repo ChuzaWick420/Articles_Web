@@ -69,8 +69,12 @@ function Details () {
                         postData(current_id, updatedLikes, -1)
                         setActiveButton("like");
                     }
-                    else
+                    else {
+                        let updatedLikes = likes - 1;
+                        setLikes(updatedLikes);
+                        postData(current_id, updatedLikes, -1)
                         setActiveButton("null");
+                    }
                 }}>
                     <span className={likes_active}>
                         thumb_up
@@ -85,8 +89,12 @@ function Details () {
                         postData(current_id, -1, updateDislikes);
                         setActiveButton("dislike");
                     }
-                    else
+                    else {
+                        let updatedDislikes = dislikes - 1;
+                        setDislikes(updatedDislikes);
+                        postData(current_id, -1, updatedDislikes);
                         setActiveButton("null");
+                    }
                 }}>
                     <span className={dislikes_active}>
                         thumb_down
