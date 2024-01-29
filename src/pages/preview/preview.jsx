@@ -15,6 +15,9 @@ function Preview () {
 
     useEffect(()=>{
         setActiveArticleID(para_article_id);
+        getData("category_cards").then((result)=>{
+            console.log("result", result);
+        });
     }, []);
 
     //send get requests to populate content

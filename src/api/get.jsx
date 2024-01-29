@@ -27,6 +27,30 @@ async function getData(request_type, article_id = 0) {
     
             return categories;
 
+        case "category_cards":
+            let cards = [];
+            let category_list = await getData("category_names");
+           
+            let temp = document.createElement("div");
+
+            for (let i = 1; i <= category_list.length; i++) {
+                url = `http://localhost:1337/api/articles?populate=category&populate=icon&filters[category][filters[id][$eq]]=${i}&pagination[pageSize]=1`;
+                let response = await fetch(url);
+                let result = await response.json();
+
+                //strip content for the card
+                temp.innerHTML = result["data"][0]["attributes"]["content"];
+                let element = temp.querySelector("p");                
+
+                cards.push({
+                    icon_url: "http://localhost:1337" + result["data"][0]["attributes"]["icon"]["data"][0]["attributes"]["formats"]["small"]["url"],
+                    content: (<p>{element.innerHTML}</p>),
+                    name: result["data"][0]["attributes"]["category"]["data"]["attributes"]["name"]
+                });
+            }
+
+            return cards;
+
         case "details":
             url = `http://localhost:1337/api/articles?filters[id][$eq]=${article_id}&populate=category&populate=icon`;
             response = await fetch(url);
