@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import parse from "html-react-parser";
 import getData from "../../api/get";
 
 import "./preview.css";
@@ -36,7 +37,20 @@ function Preview () {
     useEffect(()=>{
         setActiveArticleID(para_article_id.article_id);
         getData("footer", para_article_id.article_id).then((result)=>{
-            setFooter(result.footer_list_content);
+            let footers = [];
+            for (let x = 0; x < result.footer_list_content.length; x++){
+                footers.push(
+                    <Link to={`../preview/${result.footer_list_IDs[x]}`} key={x} >
+                        <div className="footer_cards" onClick={()=>{
+                            setActiveArticleID(result.footer_list_IDs[x]);
+                        }} >
+                            <h6>{result.category_name}</h6>
+                            <p>{parse(result.footer_list_content[x])}</p>
+                        </div>
+                    </Link>
+                );
+            }
+            setFooter(footers);
         });
     }, [activeCategoryID]);
 
