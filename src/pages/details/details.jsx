@@ -46,6 +46,10 @@ function Details () {
             setDislikes_active("material-symbols-outlined active_button");
             setLikes_active("material-symbols-outlined");
         }
+        else {
+            setLikes_active("material-symbols-outlined");
+            setDislikes_active("material-symbols-outlined");
+        }
     }, [activeButton]);
 
     return (
@@ -63,8 +67,10 @@ function Details () {
                         let updatedLikes = likes + 1;
                         setLikes(updatedLikes);
                         postData(current_id, updatedLikes, -1)
+                        setActiveButton("like");
                     }
-                    setActiveButton("like");
+                    else
+                        setActiveButton("null");
                 }}>
                     <span className={likes_active}>
                         thumb_up
@@ -77,8 +83,10 @@ function Details () {
                         let updateDislikes = dislikes + 1;
                         setDislikes(updateDislikes);
                         postData(current_id, -1, updateDislikes);
+                        setActiveButton("dislike");
                     }
-                    setActiveButton("dislike");
+                    else
+                        setActiveButton("null");
                 }}>
                     <span className={dislikes_active}>
                         thumb_down
