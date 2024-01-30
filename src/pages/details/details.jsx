@@ -33,7 +33,7 @@ function Details () {
             setDislikes(data.dislikes);
         });
         
-    }, [activeArticleID]);
+    }, [activeArticleID, current_id]);
 
     useEffect(()=>{
         getData("footer", current_id).then((result)=>{

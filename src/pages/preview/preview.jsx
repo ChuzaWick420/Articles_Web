@@ -17,6 +17,7 @@ function Preview () {
     const [filters, setFilters] = useState("");
 
     let cards = [];
+    let loc = useParams();
 
     useEffect(()=>{
         
@@ -45,7 +46,7 @@ function Preview () {
             setHeader(result.heading);
             setIconURL(result.icon_url);
         });
-    }, [activeArticleID]);
+    }, [activeArticleID, loc]);
 
     //update footer when category id updates
     useEffect(()=>{
@@ -66,7 +67,7 @@ function Preview () {
             }
             setFooter(footers);
         });
-    }, [activeCategoryID]);
+    }, [activeCategoryID, loc]);
 
     return (
         <div className="preview_page">
