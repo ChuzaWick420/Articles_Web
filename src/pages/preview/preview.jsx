@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import getData from "../../api/get";
 
@@ -17,7 +17,7 @@ function Preview () {
     const [filters, setFilters] = useState("");
 
     let cards = [];
-    let loc = useParams();
+    let loc = useLocation();
 
     useEffect(()=>{
         
@@ -39,7 +39,7 @@ function Preview () {
         });
 
     }, [filters]);
-
+    
     //send get requests to populate content
     useEffect(()=>{
         getData("details", para_article_id.article_id).then((result)=>{
@@ -72,14 +72,27 @@ function Preview () {
     return (
         <div className="preview_page">
             <div className="main">
-                <div className="preview_header">    
-                    <h1>{header}</h1>
-                    <img src={iconURL} width={400}></img>
-                </div>
-                <Link to = {`../preview/${para_article_id.article_id}/details`}>
-                    <button>Read More</button>
-                </Link>
-                <footer className="preview_footer">{footer}</footer>
+                {(()=>{
+                    if(loc.pathname.split("/").length > 2) {
+                        return (
+                            <>
+                                <div className="preview_header">    
+                                    <h1>{header}</h1>
+                                    <img src={iconURL} width={400}></img>
+                                </div>
+                                <Link to = {`../preview/${para_article_id.article_id}/details`}>
+                                    <button>Read More</button>
+                                </Link>
+                                <footer className="preview_footer">{footer}</footer>
+                            </>
+                        );
+                    }
+                    else {
+                        return (
+                            <div>Welcome to preview</div>
+                        );
+                    }
+                })()}
             </div>
             <div className="sub">
                 <div className="search_bar">
