@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import parse from "html-react-parser";
 import getData from "../../api/get";
 import postData from "../../api/post";
 
@@ -19,6 +21,7 @@ function Details () {
     const[activeButton, setActiveButton] = useState("null");
     const[likes_active, setLikes_active] = useState("material-symbols-outlined");
     const[dislikes_active, setDislikes_active] = useState("material-symbols-outlined");
+    const[activeArticleID, setActiveArticleID] = useState(current_id);
 
     useEffect(()=>{
         
@@ -30,10 +33,25 @@ function Details () {
             setDislikes(data.dislikes);
         });
         
+    }, [activeArticleID]);
+
+    useEffect(()=>{
         getData("footer", current_id).then((result)=>{
-            setFooter(result["footer_list_content"]);
+            let footers = [];
+            for (let x = 0; x < result.footer_list_content.length; x++){
+                footers.push(
+                    <Link to={`../preview/${result.footer_list_IDs[x]}/details`} key={x} >
+                        <div className="footer_card" onClick={()=>{
+                            setActiveArticleID(result.footer_list_IDs[x]);
+                        }} >
+                            <h6>{result.category_name}</h6>
+                            <p>{parse(result.footer_list_content[x])}</p>
+                        </div>
+                    </Link>
+                );
+            }
+            setFooter(footers);
         });
-        
     }, []);
     
     let updatedLikes = likes;

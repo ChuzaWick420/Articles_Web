@@ -33,6 +33,11 @@
     overflow-x: scroll;
 }
 
+.details_footer * {
+    text-decoration: none;
+    color: white;
+}
+
 .footer_card {
     width: 200px;
     flex-shrink: 0;
