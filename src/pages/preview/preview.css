@@ -16,6 +16,11 @@
     overflow-x: scroll;
 }
 
+.preview_footer * {
+    text-decoration: none;
+    color: white;
+}
+
 .sub {
     background-color: gray;
     border-radius: var(--border-primary);
@@ -43,6 +48,10 @@
     border-top-right-radius: var(--border-primary);
     border-bottom-right-radius: var(--border-primary);
     background-color: black;
+}
+
+.search_bar span:hover {
+    cursor: pointer;
 }
 
 .category_list {

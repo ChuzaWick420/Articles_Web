@@ -14,16 +14,30 @@ function Preview () {
     const [iconURL, setIconURL] = useState("null");
     const [footer, setFooter] = useState("null");
     const [categoryCards, setCategoryCards] = useState([]);
+    const [filters, setFilters] = useState("");
 
     let cards = [];
 
     useEffect(()=>{
         
         getData("category_cards").then((result)=>{
-            setCategoryCards(result);
+            let cards = [];
+            for (let x = 0; x < result.length; x++) {
+
+                if (filters == "") {
+                    setCategoryCards(result);
+                    return;
+                }
+
+                console.log(filters);
+
+                if (filters.exec(result[x].name))
+                    cards.push(result[x]);
+            }
+            setCategoryCards(cards);
         });
-        
-    }, []);
+
+    }, [filters]);
 
     //send get requests to populate content
     useEffect(()=>{
@@ -41,7 +55,7 @@ function Preview () {
             for (let x = 0; x < result.footer_list_content.length; x++){
                 footers.push(
                     <Link to={`../preview/${result.footer_list_IDs[x]}`} key={x} >
-                        <div className="footer_cards" onClick={()=>{
+                        <div className="footer_card" onClick={()=>{
                             setActiveArticleID(result.footer_list_IDs[x]);
                         }} >
                             <h6>{result.category_name}</h6>
@@ -68,15 +82,23 @@ function Preview () {
             </div>
             <div className="sub">
                 <div className="search_bar">
-                    <input type="text" placeholder="category" />
-                    <span className="material-symbols-outlined">search</span>
+                    <input className="search" type="text" placeholder="category" />
+                    <span onClick={()=>{
+                        //perform search and manipulate category cards
+                        let bar = document.querySelector(".search");
+                        if (bar.value == "") {
+                            setFilters("");
+                        }
+                        else
+                            setFilters(new RegExp(`\w*${bar.value}\w*`));
+                    }} className="material-symbols-outlined">search</span>
                 </div>
                 <div className="category_list">
                     {categoryCards.map((element, index)=>{
                         return (
                             <Link to={`../preview/${element.article_id}`} key={index}>
                                 <div className="category_card" onClick={()=>{
-                                    setActiveCategoryID(index + 1);
+                                    setActiveCategoryID(element.category_id);
                                 }}>
                                     <div className="category_text">
                                         <h6>{element.name}</h6>
